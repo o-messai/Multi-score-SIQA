@@ -111,7 +111,7 @@ class SIQADataset(Dataset):
         self.label = []
         self.label_L = []
         self.label_R = []
-        self.disto = []
+        
 
         self.im_names = [im_names[i] for i in self.index]
         self.ref_names = [ref_names[i] for i in self.index]
@@ -139,7 +139,7 @@ class SIQADataset(Dataset):
                     self.label.append(self.mos_s[idx])
                     self.label_L.append(self.mos_l[idx])
                     self.label_R.append(self.mos_r[idx])
-                    self.disto.append(typpe[idx])
+                    
 
             elif status == 'test':
                 self.patchesL = self.patchesL + (torch.stack(patchesL), )
@@ -147,13 +147,13 @@ class SIQADataset(Dataset):
                 self.label.append(self.mos_s[idx])
                 self.label_L.append(self.mos_l[idx])
                 self.label_R.append(self.mos_r[idx])
-                self.disto.append(typpe[idx])
+                
 
     def __len__(self):
         return len(self.patchesL)
 
     def __getitem__(self, idx):
-        return self.patchesL[idx], self.patchesR[idx], (torch.Tensor([self.label[idx]]), torch.Tensor([self.label_L[idx]]), torch.Tensor([self.label_R[idx]]),  self.disto[idx])
+        return self.patchesL[idx], self.patchesR[idx], (torch.Tensor([self.label[idx]]), torch.Tensor([self.label_L[idx]]), torch.Tensor([self.label_R[idx]]))
 
 
 

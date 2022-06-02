@@ -122,7 +122,7 @@ if __name__ == '__main__':
         LOSS_all = 0
         LOSS_G , LOSS_L, LOSS_R, LOSS_S = 0, 0, 0, 0
 
-        for i, (patchesL, patchesR,(label, label_L, label_R, disto)) in enumerate(train_loader):
+        for i, (patchesL, patchesR,(label, label_L, label_R)) in enumerate(train_loader):
             patchesL = patchesL.to(device)
             patchesR = patchesR.to(device)
             label = label.to(device)
@@ -180,7 +180,7 @@ if __name__ == '__main__':
         L, L_stereo = 0, 0
 
         with torch.no_grad():
-            for i, (patchesL,patchesR, (label, label_L, label_R, disto)) in enumerate(test_loader):
+            for i, (patchesL,patchesR, (label, label_L, label_R)) in enumerate(test_loader):
                 patchesL = patchesL.to(device)
                 patchesR = patchesR.to(device)
                 label = label.to(device)
@@ -189,7 +189,7 @@ if __name__ == '__main__':
 
                 y_test[i] = label.item()
  
-                disto = disto[0]
+                
 
                 outputs = model(patchesL,patchesR)[Q_index]
                 outputs_stereo = model(patchesL,patchesR)[Q_index+3]
@@ -241,7 +241,7 @@ if __name__ == '__main__':
 
         L = 0
     
-        for i, (patchesL,patchesR, (label, label_L, label_R, disto)) in enumerate(test_loader):
+        for i, (patchesL,patchesR, (label, label_L, label_R)) in enumerate(test_loader):
  
             patchesL = patchesL.to(device)
             patchesR = patchesR.to(device)
@@ -251,8 +251,7 @@ if __name__ == '__main__':
 
             y_test[i] = label.item()
 
-            disto = disto[0]
-
+         
             outputs = model(patchesL,patchesR)[Q_index]
 
 
