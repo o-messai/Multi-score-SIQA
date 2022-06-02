@@ -22,7 +22,6 @@ def get_indexNum(config, index, status):
     trainindex = index[:int(train_ratio * len(index))]
     testindex = index[int((1 - test_ratio) * len(index)):]
     train_index = [] 
-    val_index = []
     test_index = [] 
 
     ref_ids = []
@@ -34,14 +33,13 @@ def get_indexNum(config, index, status):
     for i in range(len(ref_ids)):
         train_index.append(i) if (ref_ids[i] in trainindex) else \
             test_index.append(i) if (ref_ids[i] in testindex) else \
-                val_index.append(i)
+                print("Error in splitting data")
 
     if status == 'train':
         index = train_index
     if status == 'test':
         index = test_index
-    if status == 'val':
-        index = val_index
+
 
     return len(index)
 
@@ -282,6 +280,5 @@ if __name__ == '__main__':
                                                                                                                 PLCC,
                                                                                                                 KROCC,
                                                                                                                 RMSE))
-
         f.close() 
     
