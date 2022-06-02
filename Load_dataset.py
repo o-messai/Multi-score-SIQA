@@ -1,26 +1,13 @@
-import string
 import torch
-import os
 from torch.utils.data import Dataset
-from scipy.signal import convolve2d
 from PIL import Image
 import numpy as np
 from torchvision.transforms.functional import to_tensor
-import cv2 as cv
-import torchvision
 from pathlib import Path
 
 
 def img_loader(path):
     return Image.open(path).convert('RGB')
-
-def LocalNormalization(patch, P=7, Q=7, C=1):
-    kernel = np.ones((P, Q)) / (P * Q)
-    patch_mean = convolve2d(patch, kernel, boundary='symm', mode='same')
-    patch_sm = convolve2d(np.square(patch), kernel, boundary='symm', mode='same')
-    patch_std = np.sqrt(np.maximum(patch_sm - np.square(patch_mean), 0)) + C
-    patch_ln = torch.from_numpy((patch - patch_mean) / patch_std).float().unsqueeze(0)
-    return patch_ln
 
 def CropPatches(image, patch_size=32, stride=32):
     w, h = image.size
@@ -29,7 +16,6 @@ def CropPatches(image, patch_size=32, stride=32):
     for i in range(0, h-patch_size, stride):
         for j in range(0, w-patch_size, stride):
             patch = to_tensor(image.crop((j, i, j+patch_size, i+patch_size)))
-            #patch = LocalNormalization(patch[0].numpy())
             patches = patches + (patch,)
     return patches
 
@@ -52,7 +38,7 @@ class SIQADataset(Dataset):
         trainindex = index[:int(train_ratio * len(index))]
         testindex = index[int((1 - test_ratio) * len(index)):]
         train_index, test_index = [], []
-        #val_index = []
+       
         ref_ids = []
         for line0 in open("./data/ref_ids_S.txt", "r"):
             line0 = float(line0[:-1])
@@ -64,8 +50,7 @@ class SIQADataset(Dataset):
                 train_index.append(i)
             elif(ref_ids[i] in testindex):
                 test_index.append(i)
-            #else:
-            #    val_index.append(i)
+       
 
 
         if status == 'train':
@@ -76,10 +61,7 @@ class SIQADataset(Dataset):
             self.index = test_index
             print("#==> Test Images len: {}".format(len(self.index)))
             print('#==> Test Indexes: ', testindex)
-        #if status == 'val':
-        #    self.index = val_index
-        #    print("#==> Val Images len : {}".format(len(self.index)))
-
+   
 
         self.mos_s = []
         self.mos_l = []
@@ -100,12 +82,11 @@ class SIQADataset(Dataset):
             self.mos_r.append(line_r)
         self.mos_r = np.array(self.mos_r)
 
-        #print("mos {}".format (self.mos))
+       
         im_names = []
         ref_names = []
         for line1 in open("./data/im_names_S.txt", "r"):
             line1 = line1.strip()
-            #line1 = line1[:-4]
             im_names.append(line1)
         im_names = np.array(im_names)
         #print("im_names {}".format (im_names))
@@ -117,7 +98,6 @@ class SIQADataset(Dataset):
             typpe.append(line10)
         typpe =[item[0] for item in typpe]
         typpe = np.array(typpe) 
-        
         #print("type {}".format (typpe))
 
         for line2 in open("./data/refnames_S.txt", "r"):
