@@ -1,4 +1,4 @@
-# multi-score-SIQA
+# Multi-score-SIQA
 
 This is the implementation code for our paper submitted to ICIP 2022:
 "End-to-end deep multi-score model for No-reference stereoscopic image quality assessment"
