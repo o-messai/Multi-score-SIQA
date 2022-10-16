@@ -11,6 +11,7 @@ The model will run on the browser once it's loaded (on-edge mode), therefore the
 
 ![image](https://github.com/o-messai/multi-score-SIQA/blob/main/results/online.png?raw=true)
 
+# Requirments
 
 
 # Authors
