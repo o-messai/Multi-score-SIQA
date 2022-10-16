@@ -14,11 +14,11 @@ The model will run on the browser once it's loaded (on-edge mode), therefore the
 
 ## Requirments
 
-torch </br>
-torchsummary </br>
-scipy </br>
-numpy </br> 
-PIL </br>
+- torch </br>
+- torchsummary </br>
+- scipy </br>
+- numpy </br> 
+- PIL </br>
 
 ## Authors
 Oussama Messai, Aladine Chetouani
