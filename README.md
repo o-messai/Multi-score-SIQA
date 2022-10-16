@@ -23,5 +23,5 @@ The model will run on the browser once it's loaded (on-edge mode), therefore the
 ## Authors
 Oussama Messai, Aladine Chetouani
 
-## N.B
+### N.B
 Please note that the code will be cleaned/commented in further versions.
