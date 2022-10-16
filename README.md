@@ -1,5 +1,6 @@
-# Multi-score-SIQA </br>
-## End-to-end deep multi-score model for No-reference stereoscopic image quality assessment </br>
+
+# End-to-end deep multi-score model for No-reference stereoscopic image quality assessment </br>
+## Multi-score-SIQA </br>
 
 This is the implementation code for our paper published in ICIP 2022 conference: </br>
 "End-to-end deep multi-score model for No-reference stereoscopic image quality assessment"
@@ -13,6 +14,11 @@ The model will run on the browser once it's loaded (on-edge mode), therefore the
 
 # Requirments
 
+torch </br>
+torchsummary </br>
+scipy </br>
+numpy </br> 
+PIL </br>
 
 # Authors
 Oussama Messai, Aladine Chetouani
