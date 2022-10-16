@@ -23,5 +23,14 @@ The model will run on the browser once it's loaded (on-edge mode), therefore the
 ## Authors
 Oussama Messai, Aladine Chetouani
 
+## Citation
+
+            @proceeding{messai2022-end-to-end,
+            title={End-to-end deep multi-score model for No-reference stereoscopic image quality assessment},
+            author={Messai, Oussama and Chetouani, Aladine},
+            conference={ICIP2022},
+            year={2022},
+            publisher={IEEE}}
+
 ### N.B
 Please note that the code will be cleaned/commented in further versions.
