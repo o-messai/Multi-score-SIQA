@@ -168,14 +168,12 @@ if __name__ == '__main__':
 
         
         model.eval()
-        #L = 0
-   
 
         # test phase
         y_pred = np.zeros(testnum)
         y_pred_stereo = np.zeros(testnum)
         y_test = np.zeros(testnum)
-        L, L_stereo = 0, 0
+        L, L_stereo = 0, 0    # L is for the global quality predictions and L_stereo is for the stereo quality predictions
 
         with torch.no_grad():
             for i, (patchesL,patchesR, (label, label_L, label_R)) in enumerate(test_loader):
@@ -190,17 +188,17 @@ if __name__ == '__main__':
                 
 
                 outputs = model(patchesL,patchesR)[Q_index]
-                outputs_stereo = model(patchesL,patchesR)[Q_index+3]
+                #outputs_stereo = model(patchesL,patchesR)[Q_index+3]
                 
                 score = outputs.mean()
-                score_stereo = outputs_stereo.mean()
+                #score_stereo = outputs_stereo.mean()
                 y_pred[i] = score
-                y_pred_stereo[i] = score_stereo
+                #y_pred_stereo[i] = score_stereo
 
                 loss = criterion(score, label[0])
-                loss_stereo = criterion(score_stereo, label[0])
+                #loss_stereo = criterion(score_stereo, label[0])
                 L = L + loss.item()
-                L_stereo = L_stereo + loss.item()
+                #L_stereo = L_stereo + loss.item()
 
         test_loss = L / (i + 1)
         SROCC = stats.spearmanr(y_pred, y_test)[0]
@@ -208,11 +206,11 @@ if __name__ == '__main__':
         KROCC = stats.stats.kendalltau(y_pred, y_test)[0]
         RMSE = np.sqrt(((y_pred - y_test) ** 2).mean())
 
-        test_loss_stereo = L_stereo / (i + 1)
-        SROCC_stereo = stats.spearmanr(y_pred_stereo, y_test)[0]
-        PLCC_stereo = stats.pearsonr(y_pred_stereo, y_test)[0]
-        KROCC_stereo = stats.stats.kendalltau(y_pred_stereo, y_test)[0]
-        RMSE_stereo = np.sqrt(((y_pred_stereo - y_test) ** 2).mean())
+        #test_loss_stereo = L_stereo / (i + 1)
+        #SROCC_stereo = stats.spearmanr(y_pred_stereo, y_test)[0]
+        #PLCC_stereo = stats.pearsonr(y_pred_stereo, y_test)[0]
+        #KROCC_stereo = stats.stats.kendalltau(y_pred_stereo, y_test)[0]
+        #RMSE_stereo = np.sqrt(((y_pred_stereo - y_test) ** 2).mean())
 
 
         print("#==> Epoch {} Test Results: loss={:.3f} SROCC={:.3f} PLCC={:.3f} KROCC={:.3f} RMSE={:.3f}".format(epoch,
