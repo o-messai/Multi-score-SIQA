@@ -21,8 +21,6 @@ The model will run on the browser once it's loaded (on-edge mode), therefore the
 - numpy </br> 
 - PIL </br>
 
-## Authors
-Oussama Messai, Aladine Chetouani
 
 ## Citation
 
