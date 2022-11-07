@@ -4,7 +4,7 @@
 
 This is the implementation code for our paper published in @ICIP2022 conference: </br>
 "End-to-end deep multi-score model for No-reference stereoscopic image quality assessment" </br>
-link: https://ieeexplore.ieee.org/document/9897616
+link: https://arxiv.org/abs/2211.01374
 
 ## Online web-application
 
