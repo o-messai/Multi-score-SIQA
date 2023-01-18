@@ -8,7 +8,7 @@ link: https://arxiv.org/abs/2211.01374
 
 ## Online web-application
 
-You can try out our proposed model online at: https://oussama-messai.com/quality-assessment </br>
+You can try out our proposed model online at: https://oussama-messai.com/iqa-stereo </br>
 The model will run on the browser once it's loaded (on-edge mode), therefore the run-time depends on your machine. </br>
 
 ![image](https://github.com/o-messai/multi-score-SIQA/blob/main/results/online.png?raw=true)
