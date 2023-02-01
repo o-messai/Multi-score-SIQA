@@ -10,6 +10,7 @@ link: https://arxiv.org/abs/2211.01374
 
 You can try out our proposed model online at: https://oussama-messai.com/iqa-stereo </br>
 The model will run on the browser once it's loaded (on-edge mode), therefore the run-time depends on your machine. </br>
+It should work with any image resolution greater than 32 x 32 pixels, and it supports all image formats (e.g., BMP, PNG, JPG, GIF ...etc), please note that the app does not record or save any user data/images but a feedback is much desired.
 
 ![image](https://github.com/o-messai/multi-score-SIQA/blob/main/results/online.png?raw=true)
 
