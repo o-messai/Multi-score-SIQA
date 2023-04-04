@@ -99,7 +99,8 @@ if __name__ == '__main__':
     model = My_Net().to(device)
     summary(model, input_size = [(3, 32, 32), (3, 32, 32)] )
 
-    Q_index = 0
+    Q_index = 0 # 0 for Global Quality score, 1 left Quality, 2 right Quality, 3 stereo Quality.
+
     ###
     criterion = nn.L1Loss() #nn.L1Loss(size_average=None, reduce=True, reduction= 'mean')
     optimizer = torch.optim.SGD(model.parameters(), lr=args.lr, weight_decay=args.weight_decay, momentum=0.9)
