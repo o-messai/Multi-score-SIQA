@@ -198,6 +198,7 @@ if __name__ == '__main__':
         plt.xlabel("Prediction")
         plt.ylabel("MOS")
         plt.savefig('mos_vs_pred.png')
+        plt.clf()
         #plt.show()
         #test_loss_stereo = L_stereo / (i + 1)
         #SROCC_stereo = stats.spearmanr(y_pred_stereo, y_test)[0]
