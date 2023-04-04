@@ -5,6 +5,8 @@ import numpy as np
 from torchvision.transforms.functional import to_tensor
 from pathlib import Path
 
+def NormalizeData(data):
+    return (data - np.min(data)) / (np.max(data) - np.min(data))
 
 def img_loader(path):
     return Image.open(path).convert('RGB')
@@ -38,7 +40,28 @@ class SIQADataset(Dataset):
         trainindex = index[:int(train_ratio * len(index))]
         testindex = index[int((1 - test_ratio) * len(index)):]
         train_index, test_index = [], []
-       
+        
+        im_names = []
+        ref_names = []
+        for line1 in open("./data/im_names_S.txt", "r"):
+            line1 = line1.strip()
+            im_names.append(line1)
+        im_names = np.array(im_names)
+        #print("im_names {}".format (im_names))
+        typpe = []
+        for line10  in open("./data/im_names_S.txt", "r"):
+            line10 = line10.strip()
+            line10 = line10.split("/")
+            
+            typpe.append(line10)
+        typpe =[item[0] for item in typpe]
+        typpe = np.array(typpe) 
+        #print("type {}".format (typpe))
+
+        for line2 in open("./data/refnames_S.txt", "r"):
+            line2 = line2.strip()
+            ref_names.append(line2)
+        ref_names = np.array(ref_names)
         ref_ids = []
         for line0 in open("./data/ref_ids_S.txt", "r"):
             line0 = float(line0[:-1])
@@ -61,6 +84,8 @@ class SIQADataset(Dataset):
             self.index = test_index
             print("#==> Test Images len: {}".format(len(self.index)))
             print('#==> Test Indexes: ', testindex)
+            print('#==> Test Image names: ', im_names[test_index])
+            
    
 
         self.mos_s = []
@@ -71,7 +96,7 @@ class SIQADataset(Dataset):
             line_s = float(line_s.strip())
             self.mos_s.append(line_s)
         self.mos_s = np.array(self.mos_s)
-
+    
         for line_l in open("./data/MOS_L.txt", "r"):
             line_l = float(line_l.strip())
             self.mos_l.append(line_l)
@@ -82,28 +107,6 @@ class SIQADataset(Dataset):
             self.mos_r.append(line_r)
         self.mos_r = np.array(self.mos_r)
 
-       
-        im_names = []
-        ref_names = []
-        for line1 in open("./data/im_names_S.txt", "r"):
-            line1 = line1.strip()
-            im_names.append(line1)
-        im_names = np.array(im_names)
-        #print("im_names {}".format (im_names))
-        typpe = []
-        for line10  in open("./data/im_names_S.txt", "r"):
-            line10 = line10.strip()
-            line10 = line10.split("/")
-            
-            typpe.append(line10)
-        typpe =[item[0] for item in typpe]
-        typpe = np.array(typpe) 
-        #print("type {}".format (typpe))
-
-        for line2 in open("./data/refnames_S.txt", "r"):
-            line2 = line2.strip()
-            ref_names.append(line2)
-        ref_names = np.array(ref_names)
 
         self.patchesR = ()
         self.patchesL = ()
@@ -154,21 +157,3 @@ class SIQADataset(Dataset):
 
     def __getitem__(self, idx):
         return self.patchesL[idx], self.patchesR[idx], (torch.Tensor([self.label[idx]]), torch.Tensor([self.label_L[idx]]), torch.Tensor([self.label_R[idx]]))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
