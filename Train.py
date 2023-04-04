@@ -86,7 +86,6 @@ if __name__ == '__main__':
     model_dir = "./results/"
 
     dataset = args.dataset
-   
     testnum = get_indexNum(config, index, "test")
     train_dataset = SIQADataset(dataset, config, index, "train")
     train_loader = torch.utils.data.DataLoader(train_dataset,
@@ -166,7 +165,6 @@ if __name__ == '__main__':
 
         
         model.eval()
-
         # test phase
         y_pred = np.zeros(testnum)
         y_pred_stereo = np.zeros(testnum)
@@ -218,8 +216,6 @@ if __name__ == '__main__':
                                                                                                             PLCC,
                                                                                                             KROCC,
                                                                                                             RMSE))
-
-
         if RMSE < best_RMSE :
             print("#==> Update Epoch {} best valid RMSE".format(epoch))
             torch.save(model.state_dict(), os.path.join(model_dir, 'epoch-{}.pth'.format(epoch)))
@@ -245,11 +241,7 @@ if __name__ == '__main__':
             label_R = label_R.to(device)
 
             y_test[i] = label.item()
-
-         
             outputs = model(patchesL,patchesR)[Q_index]
-
-
             score = outputs.mean()
             y_pred[i] = score
 
