@@ -83,12 +83,10 @@ if __name__ == '__main__':
     ensure_dir('results')
     save_model = "./results/model_W1.pth" 
     model_dir = "./results/"
- 
 
     dataset = args.dataset
    
     testnum = get_indexNum(config, index, "test")
-
     train_dataset = SIQADataset(dataset, config, index, "train")
     train_loader = torch.utils.data.DataLoader(train_dataset,
                                                batch_size=args.batch_size,
@@ -99,7 +97,6 @@ if __name__ == '__main__':
 
     test_dataset = SIQADataset(dataset, config, index, "test")
     test_loader = torch.utils.data.DataLoader(test_dataset)
-
 
     ###model
     model = My_Net().to(device)
@@ -182,11 +179,7 @@ if __name__ == '__main__':
                 label = label.to(device)
                 label_L = label_L.to(device)
                 label_R = label_R.to(device)
-
                 y_test[i] = label.item()
- 
-                
-
                 outputs = model(patchesL,patchesR)[Q_index]
                 #outputs_stereo = model(patchesL,patchesR)[Q_index+3]
                 
@@ -205,7 +198,12 @@ if __name__ == '__main__':
         PLCC = stats.pearsonr(y_pred, y_test)[0]
         KROCC = stats.stats.kendalltau(y_pred, y_test)[0]
         RMSE = np.sqrt(((y_pred - y_test) ** 2).mean())
-
+        
+        plt.scatter(y_pred, y_test, c ="blue")
+        plt.xlabel("Prediction")
+        plt.ylabel("MOS")
+        plt.savefig('MOS_vs_pred.png')
+        #plt.show()
         #test_loss_stereo = L_stereo / (i + 1)
         #SROCC_stereo = stats.spearmanr(y_pred_stereo, y_test)[0]
         #PLCC_stereo = stats.pearsonr(y_pred_stereo, y_test)[0]
