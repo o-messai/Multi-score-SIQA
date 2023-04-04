@@ -8,6 +8,7 @@ import yaml
 from argparse import ArgumentParser
 import random
 import torch.nn as nn
+import matplotlib.pyplot as plt
 from Network import My_Net
 from Load_dataset import SIQADataset
 
