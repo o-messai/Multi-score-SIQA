@@ -17,7 +17,6 @@ It should work with any image resolution greater than 32 x 32 pixels, and it sup
 ## Requirments
 
 - torch </br>
-- torchsummary </br>
 - scipy </br>
 - numpy </br> 
 - PIL </br>
