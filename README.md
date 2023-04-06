@@ -19,7 +19,7 @@ It should work with any image resolution greater than 32 x 32 pixels, and it sup
 - torch </br>
 - scipy </br>
 - numpy </br> 
-- PIL </br>
+- pillow </br>
 
 
 ## Citation
