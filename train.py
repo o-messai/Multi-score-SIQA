@@ -1,22 +1,23 @@
 
+from tensorboardX import SummaryWriter
 from torchsummary import summary
-import torch
-import os
-import numpy as np
-from scipy import stats
-import yaml
-from argparse import ArgumentParser
-import random
-import torch.nn as nn
-from network import My_Net
+from datetime     import datetime
+from scipy        import stats
+from argparse     import ArgumentParser
+from network      import My_Net
 from load_dataset import SIQADataset
+
 import matplotlib.pyplot as plt
+import torch.nn as nn
+import numpy as np
+import torch, os, yaml, random
+
 
 def ensure_dir(path):
     if not os.path.exists(path):
         os.makedirs(path)
 
-def get_indexNum(config, index, status):
+def get_indexNum(dataset, config, index, status):
     test_ratio = config['test_ratio']
     train_ratio = config['train_ratio']
     trainindex = index[:int(train_ratio * len(index))]
@@ -25,7 +26,7 @@ def get_indexNum(config, index, status):
     test_index = [] 
 
     ref_ids = []
-    for line0 in open("./data/ref_ids_S.txt", "r"):
+    for line0 in open("./data/" + dataset + "/ref_ids_S.txt", "r"):
         line0 = float(line0[:-1])
         ref_ids.append(line0)
     ref_ids = np.array(ref_ids)
@@ -39,6 +40,7 @@ def get_indexNum(config, index, status):
         index = train_index
     if status == 'test':
         index = test_index
+
     return len(index)
 
 if __name__ == '__main__':
@@ -48,18 +50,41 @@ if __name__ == '__main__':
     parser.add_argument("--epochs", type=int, default=100)
     parser.add_argument("--lr", type=float, default=0.0001)
     parser.add_argument("--dataset", type=str, default="Waterloo_1")
-    parser.add_argument("--weight_decay", type=float, default=0.0001)
+    parser.add_argument("--weight_decay", type=float, default=0.001)
 
     args = parser.parse_args()
     
-    seed = random.randint(10000000, 99999999) 
-    #seed = 32707809
-    torch.manual_seed(seed)
-    np.random.seed(seed)
-    print("#==> Seed:", seed)
-
     with open("config.yaml") as f:
         config = yaml.load(f, Loader=yaml.FullLoader)
+    
+    # logger for tracking experiments
+    
+    if os.path.exists('/results/performance_logs.txt'):
+        append_write = 'a' # append if already exists
+    else:
+        append_write = 'w' # make a new file if not
+    ensure_dir('results')
+    f = open('./results/performance_logs.txt', 'a+') 
+    
+    
+    #sys.stdout = f
+    now = datetime.now()
+    print("#==> Experiment date and time = ", now)
+    f.write("\n \n #============================== Experiment date and time = %s.==============================#" % now)
+    f.write("\n dataset = {:s} epochs = {:d}, batch_size = {:d}, lr = {:f}, weight_decay= {:f}".format(args.dataset, 
+                                                                                                       args.epochs, 
+                                                                                                       args.batch_size, 
+                                                                                                       args.lr, 
+                                                                                                       args.weight_decay))
+    f.write("\n %s" % config)
+    
+    #seed = random.randint(10000000, 99999999)   
+    seed = 32707809
+    torch.manual_seed(seed)
+    np.random.seed(seed)
+    
+    print("#==> Seed:", seed)
+    f.write("\n Seed : {:d}".format(seed))
 
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = True
@@ -74,16 +99,29 @@ if __name__ == '__main__':
     if args.dataset == "Waterloo_1":
         print("#==> Dataset: Waterloo_1")
         index = list(range(1, 7))
+        random.seed(seed)
         random.shuffle(index)
+        ensure_dir('model/Waterloo_1')
+        save_model = "./model/Waterloo_1/best_W1.pth" 
+        model_dir = "./model/Waterloo_1/"
+        
+    if args.dataset == "Waterloo_2":
+        print("#==> Dataset: Waterloo_2")
+        index = list(range(1, 11))
+        random.seed(seed)
+        random.shuffle(index)
+        ensure_dir('model/Waterloo_2')
+        save_model = "./model/Waterloo_2/best_W2.pth" 
+        model_dir = "./model/Waterloo_2/"
+        
     print('#==> Random indexes', index)
     
-
-    ensure_dir('results')
-    save_model = "./results/model_W1.pth" 
-    model_dir = "./results/"
+    #os.rmdir('./visualize')
+    ensure_dir('visualize/tensorboard')
+    writer = SummaryWriter('visualize/tensorboard')
 
     dataset = args.dataset
-    testnum = get_indexNum(config, index, "test")
+    testnum = get_indexNum(dataset, config, index, "test")
     train_dataset = SIQADataset(dataset, config, index, "train")
     train_loader = torch.utils.data.DataLoader(train_dataset,
                                                batch_size=args.batch_size,
@@ -194,12 +232,6 @@ if __name__ == '__main__':
         KROCC = stats.stats.kendalltau(y_pred, y_test)[0]
         RMSE = np.sqrt(((y_pred - y_test) ** 2).mean())
         
-        plt.scatter(y_pred, y_test, c ="blue")
-        plt.xlabel("Prediction")
-        plt.ylabel("MOS")
-        plt.savefig('mos_vs_pred.png')
-        plt.clf()
-        #plt.show()
         #test_loss_stereo = L_stereo / (i + 1)
         #SROCC_stereo = stats.spearmanr(y_pred_stereo, y_test)[0]
         #PLCC_stereo = stats.pearsonr(y_pred_stereo, y_test)[0]
@@ -220,6 +252,12 @@ if __name__ == '__main__':
             torch.save(model.state_dict(), save_model)
             #best_PLCC = PLCC
             best_RMSE = RMSE
+            plt.scatter(y_pred, y_test, c ="blue")
+            plt.xlabel("Prediction")
+            plt.ylabel("MOS")
+            plt.savefig('mos_vs_pred.png')
+            plt.clf()
+            #plt.show()
 
     ########################################################################## final test ############################################
     model.load_state_dict(torch.load(save_model))
@@ -255,12 +293,12 @@ if __name__ == '__main__':
         append_write = 'w' # make a new file if not
     with open('total_result.txt', 'a+') as f:
         f.seek(1)
-        f.write("%s\n" % "Waterloo 1 : Final test Results: loss={:.3f} SROCC={:.3f} PLCC={:.3f} KROCC={:.3f} RMSE={:.3f}".format(test_loss,
+        f.write("%s\n" % "Final test Results: loss={:.3f} SROCC={:.3f} PLCC={:.3f} KROCC={:.3f} RMSE={:.3f}".format(test_loss,
                                                                                                                 SROCC,
                                                                                                                 PLCC,
                                                                                                                 KROCC,
                                                                                                                 RMSE))
-        print("Phase 1 : Final test Results: loss={:.3f} SROCC={:.3f} PLCC={:.3f} KROCC={:.3f} RMSE={:.3f}".format(test_loss,
+        print("Final test Results: loss={:.3f} SROCC={:.3f} PLCC={:.3f} KROCC={:.3f} RMSE={:.3f}".format(test_loss,
                                                                                                                 SROCC,
                                                                                                                 PLCC,
                                                                                                                 KROCC,

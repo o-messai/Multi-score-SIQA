@@ -43,13 +43,13 @@ class SIQADataset(Dataset):
         
         im_names = []
         ref_names = []
-        for line1 in open("./data/im_names_S.txt", "r"):
+        for line1 in open("./data/" + dataset + "/im_names_S.txt", "r"):
             line1 = line1.strip()
             im_names.append(line1)
         im_names = np.array(im_names)
         #print("im_names {}".format (im_names))
         typpe = []
-        for line10  in open("./data/im_names_S.txt", "r"):
+        for line10  in open("./data/" + dataset + "/im_names_S.txt", "r"):
             line10 = line10.strip()
             line10 = line10.split("/")
             
@@ -58,12 +58,12 @@ class SIQADataset(Dataset):
         typpe = np.array(typpe) 
         #print("type {}".format (typpe))
 
-        for line2 in open("./data/refnames_S.txt", "r"):
+        for line2 in open("./data/" + dataset + "/refnames_S.txt", "r"):
             line2 = line2.strip()
             ref_names.append(line2)
         ref_names = np.array(ref_names)
         ref_ids = []
-        for line0 in open("./data/ref_ids_S.txt", "r"):
+        for line0 in open("./data/" + dataset + "/ref_ids_S.txt", "r"):
             line0 = float(line0[:-1])
             ref_ids.append(line0)
         ref_ids = np.array(ref_ids)
@@ -92,17 +92,17 @@ class SIQADataset(Dataset):
         self.mos_l = []
         self.mos_r = []
 
-        for line_s in open("./data/MOS_S.txt", "r"):
+        for line_s in open("./data/" + dataset + "/MOS_S.txt", "r"):
             line_s = float(line_s.strip())
             self.mos_s.append(line_s)
         self.mos_s = np.array(self.mos_s)
     
-        for line_l in open("./data/MOS_L.txt", "r"):
+        for line_l in open("./data/" + dataset + "/MOS_L.txt", "r"):
             line_l = float(line_l.strip())
             self.mos_l.append(line_l)
         self.mos_l = np.array(self.mos_l)
 
-        for line_r in open("./data/MOS_R.txt", "r"):
+        for line_r in open("./data/" + dataset + "/MOS_R.txt", "r"):
             line_r = float(line_r.strip())
             self.mos_r.append(line_r)
         self.mos_r = np.array(self.mos_r)

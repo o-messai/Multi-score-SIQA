@@ -1,0 +1,21 @@
+
+ 
+ #============================== Experiment date and time = 2023-05-20 15:20:22.424612.==============================#
+ dataset = Waterloo_1 epochs = 100, batch_size = 128, lr = 0.000100, weight_decay= 0.001000
+ {'Waterloo_1': {'im_dirL': '/home/oussama.messai/Desktop/LIRIS_desk/Databases/3D Databases/IVC3D Canada Waterloo/WaterlooIVC3DPhaseI/WaterlooIVC3DPhaseI/3D/Session3DIQ/', 'im_dirR': '/home/oussama.messai/Desktop/LIRIS_desk/Databases/3D Databases/IVC3D Canada Waterloo/WaterlooIVC3DPhaseI/WaterlooIVC3DPhaseI/3D/Session3DIQ/'}, 'Waterloo_2': {'im_dirL': '/home/oussama.messai/Desktop/LIRIS_desk/Databases/3D Databases/IVC3D Canada Waterloo/WaterlooIVC3DPhaseII/WaterlooIVC3DPhaseII/3D/Session3DIQ/', 'im_dirR': '/home/oussama.messai/Desktop/LIRIS_desk/Databases/3D Databases/IVC3D Canada Waterloo/WaterlooIVC3DPhaseII/WaterlooIVC3DPhaseII/3D/Session3DIQ/'}, 'patch_size': 32, 'stride': 32, 'train_ratio': 0.8, 'test_ratio': 0.2}
+ Seed : 32707809
+ 
+ #============================== Experiment date and time = 2023-05-20 15:20:46.971167.==============================#
+ dataset = Waterloo_1 epochs = 100, batch_size = 128, lr = 0.000100, weight_decay= 0.000100
+ {'Waterloo_1': {'im_dirL': '/home/oussama.messai/Desktop/LIRIS_desk/Databases/3D Databases/IVC3D Canada Waterloo/WaterlooIVC3DPhaseI/WaterlooIVC3DPhaseI/3D/Session3DIQ/', 'im_dirR': '/home/oussama.messai/Desktop/LIRIS_desk/Databases/3D Databases/IVC3D Canada Waterloo/WaterlooIVC3DPhaseI/WaterlooIVC3DPhaseI/3D/Session3DIQ/'}, 'Waterloo_2': {'im_dirL': '/home/oussama.messai/Desktop/LIRIS_desk/Databases/3D Databases/IVC3D Canada Waterloo/WaterlooIVC3DPhaseII/WaterlooIVC3DPhaseII/3D/Session3DIQ/', 'im_dirR': '/home/oussama.messai/Desktop/LIRIS_desk/Databases/3D Databases/IVC3D Canada Waterloo/WaterlooIVC3DPhaseII/WaterlooIVC3DPhaseII/3D/Session3DIQ/'}, 'patch_size': 32, 'stride': 32, 'train_ratio': 0.8, 'test_ratio': 0.2}
+ Seed : 32707809
+ 
+ #============================== Experiment date and time = 2023-05-20 15:21:15.365661.==============================#
+ dataset = Waterloo_1 epochs = 100, batch_size = 128, lr = 0.000100, weight_decay= 0.000100
+ {'Waterloo_1': {'im_dirL': '/home/oussama.messai/Desktop/LIRIS_desk/Databases/3D Databases/IVC3D Canada Waterloo/WaterlooIVC3DPhaseI/WaterlooIVC3DPhaseI/3D/Session3DIQ/', 'im_dirR': '/home/oussama.messai/Desktop/LIRIS_desk/Databases/3D Databases/IVC3D Canada Waterloo/WaterlooIVC3DPhaseI/WaterlooIVC3DPhaseI/3D/Session3DIQ/'}, 'Waterloo_2': {'im_dirL': '/home/oussama.messai/Desktop/LIRIS_desk/Databases/3D Databases/IVC3D Canada Waterloo/WaterlooIVC3DPhaseII/WaterlooIVC3DPhaseII/3D/Session3DIQ/', 'im_dirR': '/home/oussama.messai/Desktop/LIRIS_desk/Databases/3D Databases/IVC3D Canada Waterloo/WaterlooIVC3DPhaseII/WaterlooIVC3DPhaseII/3D/Session3DIQ/'}, 'patch_size': 32, 'stride': 32, 'train_ratio': 0.8, 'test_ratio': 0.2}
+ Seed : 67638312
+ 
+ #============================== Experiment date and time = 2023-05-20 15:29:09.243857.==============================#
+ dataset = Waterloo_1 epochs = 100, batch_size = 128, lr = 0.000100, weight_decay= 0.001000
+ {'Waterloo_1': {'im_dirL': '/home/oussama.messai/Desktop/LIRIS_desk/Databases/3D Databases/IVC3D Canada Waterloo/WaterlooIVC3DPhaseI/WaterlooIVC3DPhaseI/3D/Session3DIQ/', 'im_dirR': '/home/oussama.messai/Desktop/LIRIS_desk/Databases/3D Databases/IVC3D Canada Waterloo/WaterlooIVC3DPhaseI/WaterlooIVC3DPhaseI/3D/Session3DIQ/'}, 'Waterloo_2': {'im_dirL': '/home/oussama.messai/Desktop/LIRIS_desk/Databases/3D Databases/IVC3D Canada Waterloo/WaterlooIVC3DPhaseII/WaterlooIVC3DPhaseII/3D/Session3DIQ/', 'im_dirR': '/home/oussama.messai/Desktop/LIRIS_desk/Databases/3D Databases/IVC3D Canada Waterloo/WaterlooIVC3DPhaseII/WaterlooIVC3DPhaseII/3D/Session3DIQ/'}, 'patch_size': 32, 'stride': 32, 'train_ratio': 0.8, 'test_ratio': 0.2}
+ Seed : 97348946
