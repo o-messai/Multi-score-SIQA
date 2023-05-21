@@ -2,7 +2,7 @@
 # End-to-end deep multi-score model for No-reference stereoscopic image quality assessment </br>
 ## Multi-score-SIQA </br>
 
-This is the implementation code for our paper published in @ICIP2022 conference: </br>
+This is the implementation code for our paper published at 2023 IEEE International Conference on Image Processing (ICIP 2023): </br>
 "End-to-end deep multi-score model for No-reference stereoscopic image quality assessment" </br>
 link: https://arxiv.org/abs/2211.01374
 
