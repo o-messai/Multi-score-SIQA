@@ -30,6 +30,3 @@ It should work with any image resolution greater than 32 x 32 pixels, and it sup
             conference={ICIP2022},
             year={2022},
             publisher={IEEE}}
-
-####
-N.B: Please note that the code will be cleaned/commented in further versions.
