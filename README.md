@@ -4,7 +4,7 @@
 
 This repository contains the implementation of an end-to-end deep multi-score model for no-reference stereoscopic image quality assessment (SIQA). The model predicts multiple quality scores, including global quality, left view quality, right view quality, and stereo quality, without requiring a reference image.
 
-## Features
+### Features
 
 - **Multi-Score Prediction**: Predicts global, left, right, and stereo quality scores.
 - **No-reference Assessment**: Evaluates image quality without the need for a reference image.
